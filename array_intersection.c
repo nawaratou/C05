@@ -1,48 +1,60 @@
 #include <stdio.h>
 
 int main() {
-    int taille1, taille2;
+    int size1, size2;
     
-    // Lecture des tableaux
-    scanf("%d", &taille1);
-    int tab1[taille1];
-    for(int i = 0; i < taille1; i++) {
-        scanf("%d", &tab1[i]);
+    // Lecture du premier tableau
+    scanf("%d", &size1);
+    int arr1[size1];
+    for(int i = 0; i < size1; i++) {
+        scanf("%d", &arr1[i]);
     }
     
-    scanf("%d", &taille2);
-    int tab2[taille2];
-    for(int i = 0; i < taille2; i++) {
-        scanf("%d", &tab2[i]);
+    // Lecture du deuxième tableau
+    scanf("%d", &size2);
+    int arr2[size2];
+    for(int i = 0; i < size2; i++) {
+        scanf("%d", &arr2[i]);
     }
     
-    // Recherche de l'intersection
     printf("Intersection :");
-    int intersection_trouvee = 0;
+    int found = 0;
     
-    for(int i = 0; i < taille1; i++) {
-        // Vérifier si c'est un doublon dans tab1
-        int doublon = 0;
+    // Parcourir le premier tableau
+    for(int i = 0; i < size1; i++) {
+        // Vérifier les doublons dans arr1
+        int is_duplicate = 0;
         for(int j = 0; j < i; j++) {
-            if(tab1[j] == tab1[i]) {
-                doublon = 1;
+            if(arr1[i] == arr1[j]) {
+                is_duplicate = 1;
                 break;
             }
         }
         
-        if(!doublon) {
-            // Chercher dans tab2
-            for(int k = 0; k < taille2; k++) {
-                if(tab1[i] == tab2[k]) {
-                    printf(" %d", tab1[i]);
-                    intersection_trouvee = 1;
-                    break;
+        if(!is_duplicate) {
+            // Chercher dans arr2
+            for(int k = 0; k < size2; k++) {
+                if(arr1[i] == arr2[k]) {
+                    // Vérifier les doublons dans arr2
+                    int duplicate_in_arr2 = 0;
+                    for(int l = 0; l < k; l++) {
+                        if(arr2[l] == arr2[k]) {
+                            duplicate_in_arr2 = 1;
+                            break;
+                        }
+                    }
+                    
+                    if(!duplicate_in_arr2) {
+                        printf(" %d", arr1[i]);
+                        found = 1;
+                        break;
+                    }
                 }
             }
         }
     }
     
-    if(!intersection_trouvee) {
+    if(!found) {
         printf(" Aucun");
     }
     printf("\n");
