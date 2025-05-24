@@ -2,16 +2,16 @@
 
 int main() {
     int n1, n2;
-    int arr1[100], arr2[100]; // Taille max fixée à 100 pour éviter les erreurs
+    long arr1[100], arr2[100]; // Taille max fixée à 100 pour éviter les erreurs
 
     scanf("%d", &n1);
     for (int i = 0; i < n1; i++) {
-        scanf("%d", &arr1[i]);
+        scanf("%ld", &arr1[i]);
     }
 
     scanf("%d", &n2);
     for (int i = 0; i < n2; i++) {
-        scanf("%d", &arr2[i]);
+        scanf("%ld", &arr2[i]);
     }
 
     printf("Intersection : ");
@@ -32,7 +32,7 @@ int main() {
         // Vérifie si arr1[i] est présent dans arr2
         for (int j = 0; j < n2; j++) {
             if (arr1[i] == arr2[j]) {
-                printf("%d ", arr1[i]);
+                printf("%ld ", arr1[i]);
                 break;
             }
         }
