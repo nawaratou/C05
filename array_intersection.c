@@ -2,24 +2,23 @@
 
 int main() {
     int n1, n2;
-    scanf("%d", &n1); // Lecture de la taille du premier tableau
+    int arr1[100], arr2[100]; // Taille max fixée à 100 pour éviter les erreurs
 
-    int arr1[n1];
+    scanf("%d", &n1);
     for (int i = 0; i < n1; i++) {
-        scanf("%d", &arr1[i]); // Lecture des éléments du 1er tableau
+        scanf("%d", &arr1[i]);
     }
 
-    scanf("%d", &n2); // Lecture de la taille du 2e tableau
-
-    int arr2[n2];
+    scanf("%d", &n2);
     for (int i = 0; i < n2; i++) {
-        scanf("%d", &arr2[i]); // Lecture des éléments du 2e tableau
+        scanf("%d", &arr2[i]);
     }
 
     printf("Intersection : ");
     for (int i = 0; i < n1; i++) {
         int already_printed = 0;
-        // Vérifier si l'élément arr1[i] a déjà été imprimé
+
+        // Vérifie si arr1[i] a déjà été affiché
         for (int k = 0; k < i; k++) {
             if (arr1[i] == arr1[k]) {
                 already_printed = 1;
@@ -28,8 +27,9 @@ int main() {
         }
 
         if (already_printed)
-            continue; // on passe à l’élément suivant
+            continue;
 
+        // Vérifie si arr1[i] est présent dans arr2
         for (int j = 0; j < n2; j++) {
             if (arr1[i] == arr2[j]) {
                 printf("%d ", arr1[i]);
