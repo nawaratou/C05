@@ -1,57 +1,50 @@
 #include <stdio.h>
 
-// Fonction pour vérifier si un élément existe dans un tableau
+#define MAX_SIZE 100
+
+// Vérifie si une valeur est déjà présente dans un tableau
 int existe_deja(int tab[], int taille, int valeur) {
-    for (int i = 0; i < taille; i++) {
+    int i;
+    for (i = 0; i < taille; i++) {
         if (tab[i] == valeur) {
-            return 1; // Existe déjà
+            return 1;
         }
     }
-    return 0; // N'existe pas
+    return 0;
 }
 
 int main() {
-    int taille1, taille2;
+    int n1, n2;
+    int tab1[MAX_SIZE], tab2[MAX_SIZE];
+    int inter[MAX_SIZE];
+    int i, j, k = 0;
 
-    // Lecture de la taille du premier tableau
-    scanf("%d", &taille1);
-
-    int tab1[taille1];
-
-    // Lecture des éléments du premier tableau
-    for (int i = 0; i < taille1; i++) {
+    scanf("%d", &n1);
+    for (i = 0; i < n1; i++) {
         scanf("%d", &tab1[i]);
     }
 
-    // Lecture de la taille du second tableau
-    scanf("%d", &taille2);
-
-    int tab2[taille2];
-
-    // Lecture des éléments du second tableau
-    for (int i = 0; i < taille2; i++) {
+    scanf("%d", &n2);
+    for (i = 0; i < n2; i++) {
         scanf("%d", &tab2[i]);
     }
 
-    int intersection[taille1 < taille2 ? taille1 : taille2];
-    int taille_intersection = 0;
-
-    // Comparaison croisée des deux tableaux
-    for (int i = 0; i < taille1; i++) {
-        for (int j = 0; j < taille2; j++) {
+    // Comparaison croisée pour trouver l'intersection sans doublons
+    for (i = 0; i < n1; i++) {
+        for (j = 0; j < n2; j++) {
             if (tab1[i] == tab2[j]) {
-                // Ajoute à l'intersection si ce n'est pas déjà là
-                if (!existe_deja(intersection, taille_intersection, tab1[i])) {
-                    intersection[taille_intersection++] = tab1[i];
+                if (!existe_deja(inter, k, tab1[i])) {
+                    inter[k++] = tab1[i];
                 }
+                break;
             }
         }
     }
 
-    // Affichage du résultat
-    printf("Intersection : ");
-    for (int i = 0; i < taille_intersection; i++) {
-        printf("%d ", intersection[i]);
+    // Affichage du résultat sans espace final
+    printf("Intersection :");
+    for (i = 0; i < k; i++) {
+        printf(" %d", inter[i]);
     }
     printf("\n");
 
