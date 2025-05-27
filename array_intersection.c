@@ -14,25 +14,21 @@ int main() {
     int taille1, taille2;
 
     // Lecture de la taille du premier tableau
-    printf("Entrez la taille du premier tableau :\n");
     scanf("%d", &taille1);
 
     int tab1[taille1];
 
     // Lecture des éléments du premier tableau
-    printf("Entrez les éléments du premier tableau :\n");
     for (int i = 0; i < taille1; i++) {
         scanf("%d", &tab1[i]);
     }
 
     // Lecture de la taille du second tableau
-    printf("Entrez la taille du second tableau :\n");
     scanf("%d", &taille2);
 
     int tab2[taille2];
 
     // Lecture des éléments du second tableau
-    printf("Entrez les éléments du second tableau :\n");
     for (int i = 0; i < taille2; i++) {
         scanf("%d", &tab2[i]);
     }
