@@ -2,11 +2,7 @@
 
 int main() {
     int n1, n2;
-    int tab1[100], tab2[100];
-    int i, j, k;
-    int inter[100]; // Pour stocker l'intersection
-    int interCount = 0;
-    int deja;
+    int tab1[100], tab2[100], i, j;
 
     // Lire la taille et les éléments du premier tableau
     scanf("%d", &n1);
@@ -20,33 +16,28 @@ int main() {
         scanf("%d", &tab2[i]);
     }
 
-    // Trouver l'intersection
+    // Affichage de l'intersection
+    printf("Intersection :");
     for (i = 0; i < n1; i++) {
         for (j = 0; j < n2; j++) {
             if (tab1[i] == tab2[j]) {
-                // Vérifier si déjà ajouté à inter[]
-                deja = 0;
-                for (k = 0; k < interCount; k++) {
-                    if (inter[k] == tab1[i]) {
-                        deja = 1;
+                // Vérifie si c’est déjà affiché
+                int deja_affiche = 0;
+                int k;
+                for (k = 0; k < i; k++) {
+                    if (tab1[k] == tab1[i]) {
+                        deja_affiche = 1;
                         break;
                     }
                 }
-                if (!deja) {
-                    inter[interCount] = tab1[i];
-                    interCount++;
+                if (!deja_affiche) {
+                    printf(" %d", tab1[i]);
                 }
-                break;
+                break; // On passe à l’élément suivant de tab1
             }
         }
     }
 
-    // Affichage conforme à l'exemple
-    printf("Intersection :");
-    for (i = 0; i < interCount; i++) {
-        printf(" %d", inter[i]);
-    }
     printf("\n");
-
     return 0;
 }
