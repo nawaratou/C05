@@ -1,45 +1,63 @@
 #include <stdio.h>
 
-int main() {
-    int n1, n2;
-    int tab1[100], tab2[100];
-    int i, j, k;
-    int deja;
+// Fonction pour vérifier si un élément existe dans un tableau
+int existe_deja(int tab[], int taille, int valeur) {
+    for (int i = 0; i < taille; i++) {
+        if (tab[i] == valeur) {
+            return 1; // Existe déjà
+        }
+    }
+    return 0; // N'existe pas
+}
 
-    // Lire la taille du premier tableau
-    scanf("%d", &n1);
-    for (i = 0; i < n1; i++) {
+int main() {
+    int taille1, taille2;
+
+    // Lecture de la taille du premier tableau
+    printf("Entrez la taille du premier tableau :\n");
+    scanf("%d", &taille1);
+
+    int tab1[taille1];
+
+    // Lecture des éléments du premier tableau
+    printf("Entrez les éléments du premier tableau :\n");
+    for (int i = 0; i < taille1; i++) {
         scanf("%d", &tab1[i]);
     }
 
-    // Lire la taille du deuxième tableau
-    scanf("%d", &n2);
-    for (i = 0; i < n2; i++) {
+    // Lecture de la taille du second tableau
+    printf("Entrez la taille du second tableau :\n");
+    scanf("%d", &taille2);
+
+    int tab2[taille2];
+
+    // Lecture des éléments du second tableau
+    printf("Entrez les éléments du second tableau :\n");
+    for (int i = 0; i < taille2; i++) {
         scanf("%d", &tab2[i]);
     }
 
-    printf("Intersection :");
+    int intersection[taille1 < taille2 ? taille1 : taille2];
+    int taille_intersection = 0;
 
-    // Vérifier les éléments communs
-    for (i = 0; i < n1; i++) {
-        for (j = 0; j < n2; j++) {
+    // Comparaison croisée des deux tableaux
+    for (int i = 0; i < taille1; i++) {
+        for (int j = 0; j < taille2; j++) {
             if (tab1[i] == tab2[j]) {
-                // Vérifie si déjà affiché
-                deja = 0;
-                for (k = 0; k < i; k++) {
-                    if (tab1[k] == tab1[i]) {
-                        deja = 1;
-                        break;
-                    }
+                // Ajoute à l'intersection si ce n'est pas déjà là
+                if (!existe_deja(intersection, taille_intersection, tab1[i])) {
+                    intersection[taille_intersection++] = tab1[i];
                 }
-                if (!deja) {
-                    printf(" %d", tab1[i]);
-                }
-                break;
             }
         }
     }
 
+    // Affichage du résultat
+    printf("Intersection : ");
+    for (int i = 0; i < taille_intersection; i++) {
+        printf("%d ", intersection[i]);
+    }
     printf("\n");
+
     return 0;
 }
