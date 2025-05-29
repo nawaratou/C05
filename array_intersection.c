@@ -1,61 +1,44 @@
 #include <stdio.h>
 
-// Fonction pour trouver l'intersection entre deux tableaux
-void intersection(int a[], int n1, int b[], int n2, int res[], int *res_size) {
-    *res_size = 0; // Initialiser la taille du résultat à 0
+#define MAX 1001 // Limite max pour les valeurs possibles dans les tableaux
 
-    for (int i = 0; i < n1; i++) {
-        for (int j = 0; j < n2; j++) {
-            if (a[i] == b[j]) {
-                // Vérifier si a[i] est déjà dans res[]
-                int found = 0;
-                for (int k = 0; k < *res_size; k++) {
-                    if (res[k] == a[i]) {
-                        found = 1;
-                        break;
-                    }
-                }
-                // Si non trouvé, l'ajouter dans res[]
-                if (!found) {
-                    res[(*res_size)++] = a[i];
-                }
-            }
+void intersection(int A[], int B[], int m, int n) {
+    int hash[MAX] = {0}; // Hash table pour B
+    int res[MAX] = {0};  // Résultat sans doublons
+
+    // Marquer les éléments de B dans la hash table
+    for (int i = 0; i < n; i++) {
+        hash[B[i]] = 1;
+    }
+
+    // Chercher les éléments de A qui sont aussi dans B
+    for (int i = 0; i < m; i++) {
+        if (hash[A[i]] == 1 && res[A[i]] == 0) {
+            printf("%d ", A[i]);
+            res[A[i]] = 1; // Pour éviter les doublons dans la sortie
         }
     }
 }
 
 int main() {
-    int n1, n2;
+    int m, n;
 
-    // Lire la taille du premier tableau
-    scanf("%d", &n1);
-    int a[n1];
-
-    // Lire les éléments du premier tableau
-    for (int i = 0; i < n1; i++) {
-        scanf("%d", &a[i]);
+    // Lire la taille et les éléments du premier tableau
+    scanf("%d", &m);
+    int A[m];
+    for (int i = 0; i < m; i++) {
+        scanf("%d", &A[i]);
     }
 
-    // Lire la taille du second tableau
-    scanf("%d", &n2);
-    int b[n2];
-
-    // Lire les éléments du second tableau
-    for (int i = 0; i < n2; i++) {
-        scanf("%d", &b[i]);
+    // Lire la taille et les éléments du second tableau
+    scanf("%d", &n);
+    int B[n];
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &B[i]);
     }
 
-    int res[n1 < n2 ? n1 : n2]; // La taille max de l'intersection = min(n1, n2)
-    int res_size = 0;
-
-    // Calculer l'intersection
-    intersection(a, n1, b, n2, res, &res_size);
-
-    // Affichage du résultat
-    printf("Intersection :");
-    for (int i = 0; i < res_size; i++) {
-        printf(" %d", res[i]);
-    }
+    printf("Intersection : ");
+    intersection(A, B, m, n);
     printf("\n");
 
     return 0;
