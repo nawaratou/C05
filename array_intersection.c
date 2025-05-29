@@ -1,81 +1,77 @@
-#include<stdio.h>
-int removerepeated(int size,int a[]);
-void sort(int size,int a[]);
+#include <stdio.h>
+
+// Fonction pour trier un tableau (tri à bulles)
+void sort(int size, int a[]) {
+    int i, j, temp;
+    for (i = 0; i < size - 1; i++) {
+        for (j = i + 1; j < size; j++) {
+            if (a[i] > a[j]) {
+                temp = a[i];
+                a[i] = a[j];
+                a[j] = temp;
+            }
+        }
+    }
+}
+
+// Fonction pour supprimer les doublons dans un tableau trié
+int removeRepeated(int size, int a[]) {
+    int i, j = 0;
+    if (size == 0) return 0;
+
+    for (i = 1; i < size; i++) {
+        if (a[i] != a[j]) {
+            j++;
+            a[j] = a[i];
+        }
+    }
+    return j + 1;
+}
+
 int main() {
-    int i,size1,size2,size,j=0,k,intersectionsize;
-    printf("Enter size of an array1\n");
-    scanf("%d",&size1);
-    printf("Enter size of an array2\n");
-    scanf("%d",&size2);
-    int a[size1],b[size2],uni[size1+size2];
-    if(size1<size2){
-        intersectionsize=size1;
+    int size1, size2, i, j, k = 0;
+
+    // Lecture des tailles
+    scanf("%d", &size1);
+    int a[size1];
+    for (i = 0; i < size1; i++) {
+        scanf("%d", &a[i]);
     }
-    else if(size1>size2){
-        intersectionsize=size2;
+
+    scanf("%d", &size2);
+    int b[size2];
+    for (i = 0; i < size2; i++) {
+        scanf("%d", &b[i]);
     }
-    else{
-        intersectionsize=size1;
-    }
-    int intersection[intersectionsize];
-    printf("Enter numbers for array 1\n");
-    for(i=0;i<size1;i++){
-        scanf("%d",&a[i]);
-    }
-    printf("Enter numbers for array 2\n");
-    for(i=0;i<size2;i++){
-        scanf("%d",&b[i]);
-    }
-    //Intersection starts
-    k=0;
-    for(i=0;i<size1;i++){
-        for(j=0;j<size2;j++){
-            if(a[i]==b[j]){
-                intersection[k]=a[i];
-                k++;
+
+    // Taille max possible pour l'intersection
+    int maxSize = (size1 < size2) ? size1 : size2;
+    int intersection[maxSize];
+
+    // Calcul de l'intersection
+    for (i = 0; i < size1; i++) {
+        for (j = 0; j < size2; j++) {
+            if (a[i] == b[j]) {
+                intersection[k++] = a[i];
+                break; // Évite les doublons s’il y en a dans b[]
             }
         }
     }
-    //Sorting
-    sort(k,intersection);
-    //Removing
-    size=removerepeated(k,intersection);
-    printf("Array after intersection\n");
-    if(size>0){
-        for(i=0;i<size;i++){
-            printf("%d\n",intersection[i]);
-        }   
-    }
-    else{
-        printf("No intersection\n");
-    }
-}
-int removerepeated(int size,int a[]){
-    int i,j,k;
-    for(i=0;i<size;i++){
-        for(j=i+1;j<size;){
-            if(a[i]==a[j]){
-                for(k=j;k<size;k++){
-                    a[k]=a[k+1];
-                }
-                size--;
-            }
-            else{
-                j++;
-            }
+
+    // Trier et supprimer les doublons
+    sort(k, intersection);
+    int finalSize = removeRepeated(k, intersection);
+
+    // Affichage du résultat
+    if (finalSize > 0) {
+        printf("Intersection :");
+        for (i = 0; i < finalSize; i++) {
+            printf(" %d", intersection[i]);
         }
+        printf("\n");
+    } else {
+        printf("Intersection :\n");
     }
-    return(size);
-}
-void sort(int size,int a[]){
-    int i,j,temp;
-    for(i=0;i<size;i++){
-        for(j=i+1;j<size;j++){
-            if(a[i]>a[j]){
-                temp=a[i];
-                a[i]=a[j];
-                a[j]=temp;
-            }
-        }
-    }
+
+    return 0;
 }
