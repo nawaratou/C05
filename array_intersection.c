@@ -1,55 +1,61 @@
 #include <stdio.h>
-#include <stdlib.h>
 
-// Fonction pour calculer l'intersection
-int* intersection(int* nums1, int nums1Size, int* nums2, int nums2Size, int* returnSize) {
-    int* result = (int*)malloc(sizeof(int) * (nums1Size < nums2Size ? nums1Size : nums2Size));
-    *returnSize = 0;
+int main() {
+    int n;
+    int m;
+    int a[100];
+    int b[100];
+    int res[100];
+    int i;
+    int j;
+    int k;
+    int x;
+    int existe;
 
-    for (int i = 0; i < nums1Size; i++) {
-        for (int j = 0; j < nums2Size; j++) {
-            if (nums1[i] == nums2[j]) {
-                // Vérifier si déjà présent dans result
-                int found = 0;
-                for (int k = 0; k < *returnSize; k++) {
-                    if (result[k] == nums1[i]) {
-                        found = 1;
+    k = 0;
+
+    // Lire la taille du premier tableau
+    scanf("%d", &n);
+
+    // Lire les éléments du premier tableau
+    for (i = 0; i < n; i++) {
+        scanf("%d", &a[i]);
+    }
+
+    // Lire la taille du deuxième tableau
+    scanf("%d", &m);
+
+    // Lire les éléments du deuxième tableau
+    for (i = 0; i < m; i++) {
+        scanf("%d", &b[i]);
+    }
+
+    // Comparaison des deux tableaux
+    for (i = 0; i < n; i++) {
+        for (j = 0; j < m; j++) {
+            if (a[i] == b[j]) {
+                existe = 0;
+                for (x = 0; x < k; x++) {
+                    if (res[x] == a[i]) {
+                        existe = 1;
                         break;
                     }
                 }
-                if (!found) {
-                    result[*returnSize] = nums1[i];
-                    (*returnSize)++;
+                if (existe == 0) {
+                    res[k] = a[i];
+                    k++;
                 }
+                break;
             }
         }
     }
-    return result;
-}
 
-int main() {
-    int n1, n2;
-    scanf("%d", &n1);
-    int nums1[n1];
-    for (int i = 0; i < n1; i++) {
-        scanf("%d", &nums1[i]);
-    }
-
-    scanf("%d", &n2);
-    int nums2[n2];
-    for (int i = 0; i < n2; i++) {
-        scanf("%d", &nums2[i]);
-    }
-
-    int returnSize;
-    int* result = intersection(nums1, n1, nums2, n2, &returnSize);
-
+    // Affichage
     printf("Intersection :");
-    for (int i = 0; i < returnSize; i++) {
-        printf(" %d", result[i]);
+    for (i = 0; i < k; i++) {
+        printf(" %d", res[i]);
     }
     printf("\n");
 
-    free(result);
     return 0;
 }
