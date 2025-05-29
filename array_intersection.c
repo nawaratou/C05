@@ -20,6 +20,7 @@ int main() {
         for (int j = 0; j < m; j++) {
             if (a[i] == b[j]) {
                 printf(" %d", a[i]);
+                break;
             }
         }
     }
