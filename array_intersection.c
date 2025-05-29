@@ -1,53 +1,81 @@
-#include <stdio.h>
-
-#define MAX 1001 // On suppose que les valeurs sont entre 0 et 1000
-
-void intersection(int A[], int B[], int m, int n, int res[], int *res_size) {
-    int hash[MAX] = {0};     // Marque les éléments présents dans B
-    int seen[MAX] = {0};     // Pour éviter les doublons dans le résultat
-
-    *res_size = 0;
-
-    // Marquer les éléments de B dans la table de hachage
-    for (int i = 0; i < n; i++) {
-        hash[B[i]] = 1;
+#include<stdio.h>
+int removerepeated(int size,int a[]);
+void sort(int size,int a[]);
+int main() {
+    int i,size1,size2,size,j=0,k,intersectionsize;
+    printf("Enter size of an array1\n");
+    scanf("%d",&size1);
+    printf("Enter size of an array2\n");
+    scanf("%d",&size2);
+    int a[size1],b[size2],uni[size1+size2];
+    if(size1<size2){
+        intersectionsize=size1;
     }
-
-    // Vérifier les éléments de A
-    for (int i = 0; i < m; i++) {
-        if (hash[A[i]] == 1 && seen[A[i]] == 0) {
-            res[*res_size] = A[i];
-            (*res_size)++;
-            seen[A[i]] = 1; // Ne pas ajouter plusieurs fois
+    else if(size1>size2){
+        intersectionsize=size2;
+    }
+    else{
+        intersectionsize=size1;
+    }
+    int intersection[intersectionsize];
+    printf("Enter numbers for array 1\n");
+    for(i=0;i<size1;i++){
+        scanf("%d",&a[i]);
+    }
+    printf("Enter numbers for array 2\n");
+    for(i=0;i<size2;i++){
+        scanf("%d",&b[i]);
+    }
+    //Intersection starts
+    k=0;
+    for(i=0;i<size1;i++){
+        for(j=0;j<size2;j++){
+            if(a[i]==b[j]){
+                intersection[k]=a[i];
+                k++;
+            }
         }
     }
+    //Sorting
+    sort(k,intersection);
+    //Removing
+    size=removerepeated(k,intersection);
+    printf("Array after intersection\n");
+    if(size>0){
+        for(i=0;i<size;i++){
+            printf("%d\n",intersection[i]);
+        }   
+    }
+    else{
+        printf("No intersection\n");
+    }
 }
-
-int main() {
-    int m, n;
-    scanf("%d", &m);
-    int A[m];
-    for (int i = 0; i < m; i++) {
-        scanf("%d", &A[i]);
+int removerepeated(int size,int a[]){
+    int i,j,k;
+    for(i=0;i<size;i++){
+        for(j=i+1;j<size;){
+            if(a[i]==a[j]){
+                for(k=j;k<size;k++){
+                    a[k]=a[k+1];
+                }
+                size--;
+            }
+            else{
+                j++;
+            }
+        }
     }
-
-    scanf("%d", &n);
-    int B[n];
-    for (int i = 0; i < n; i++) {
-        scanf("%d", &B[i]);
+    return(size);
+}
+void sort(int size,int a[]){
+    int i,j,temp;
+    for(i=0;i<size;i++){
+        for(j=i+1;j<size;j++){
+            if(a[i]>a[j]){
+                temp=a[i];
+                a[i]=a[j];
+                a[j]=temp;
+            }
+        }
     }
-
-    int res[m < n ? m : n]; // Taille max possible de l’intersection
-    int res_size;
-
-    intersection(A, B, m, n, res, &res_size);
-
-    // Sortie conforme à l’exemple
-    printf("Intersection :");
-    for (int i = 0; i < res_size; i++) {
-        printf(" %d", res[i]);
-    }
-    printf("\n");
-
-    return 0;
 }
