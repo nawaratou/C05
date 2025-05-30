@@ -1,32 +1,33 @@
 #include <stdio.h>
 
-int main() { // programme pour trouver l'intersection de deux tableaux
-    // Entrée des deux tableaux
-    int n; // taille du premier tableau
+int main() {
+    int n;  // taille du premier tableau
+    scanf("%d", &n);
 
-    scanf("%d", &n); // Lecture de la taille du premier tableau
-    int a[n]; // Déclaration du premier tableau
-    for (int i = 0; i < n; i++) { // Boucle pour lire les éléments du premier tableau
-        scanf("%d", &a[i]); // Lecture des éléments du premier tableau
-    } // Fin de la lecture du premier tableau
+    int tab1[n];  // premier tableau
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &tab1[i]);  // lecture des éléments de tab1
+    }
 
-    int m; // taille du deuxième tableau
-    // Lecture de la taille du deuxième tableau
-    scanf("%d", &m); // Déclaration du deuxième tableau
-    int b[m]; // Boucle pour lire les éléments du deuxième tableau
-    for (int i = 0; i < m; i++) { // Lecture des éléments du deuxième tableau
-        scanf("%d", &b[i]); // Fin de la lecture du deuxième tableau
-    } // Fin de la lecture du deuxième tableau
+    int m;  // taille du deuxième tableau
+    scanf("%d", &m);
 
-    printf("Intersection :"); // Affichage de l'en-tête pour l'intersection
-    for (int i = 0; i < n; i++) { // Boucle pour parcourir le premier tableau
-        for (int j = 0; j < m; j++) { // Boucle pour parcourir le deuxième tableau
-            if (a[i] == b[j]) { // Vérification de l'égalité des éléments
-                printf(" %d", a[i]); // Affichage de l'élément commun
-                break; // Sortie de la boucle interne si un élément commun est trouvé
+    int tab2[m];  // deuxième tableau
+    for (int i = 0; i < m; i++) {
+        scanf("%d", &tab2[i]);  // lecture des éléments de tab2
+    }
+
+    // Affichage de l'intersection
+    printf("Intersection :");
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            if (tab1[i] == tab2[j]) {
+                printf(" %d", tab1[i]);  // élément commun trouvé
+                break;                   // on ne veut pas répéter ce même élément
             }
         }
     }
-    printf("\n"); // Affichage d'une nouvelle ligne après l'intersection
+    printf("\n");
+
     return 0;
 }
