@@ -1,33 +1,30 @@
 #include <stdio.h>
 
 int main() {
-    int n;  // taille du premier tableau
+    int n;
     scanf("%d", &n);
-
-    int tab1[n];  // premier tableau
+    int a[n];
     for (int i = 0; i < n; i++) {
-        scanf("%d", &tab1[i]);  // lecture des éléments de tab1
+        scanf("%d", &a[i]);
     }
 
-    int m;  // taille du deuxième tableau
+    int m;
     scanf("%d", &m);
-
-    int tab2[m];  // deuxième tableau
+    int b[m];
     for (int i = 0; i < m; i++) {
-        scanf("%d", &tab2[i]);  // lecture des éléments de tab2
+        scanf("%d", &b[i]);
     }
 
-    // Affichage de l'intersection
     printf("Intersection :");
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < m; j++) {
-            if (tab1[i] == tab2[j]) {
-                printf(" %d", tab1[i]);  // élément commun trouvé
-                break;                   // on ne veut pas répéter ce même élément
+            if (a[i] == b[j]) {
+                printf(" %d", a[i]);
+                break;
             }
         }
     }
-    printf("\n");
 
+    printf("\n");
     return 0;
 }
