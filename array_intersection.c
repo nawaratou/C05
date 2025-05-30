@@ -1,34 +1,32 @@
-#include <stdio.h> // This line helps us do things like show text on the screen and read numbers.
+#include <stdio.h>
 
 int main() {
-    int n;  // size of the first array (taille du premier tableau)
-    scanf("%d", &n); // read the size (lecture de la taille)
+    int n;  // taille du premier tableau
+    scanf("%d", &n);
 
-    int tab1[n];  // first array (premier tableau)
+    int tab1[n];  // premier tableau
     for (int i = 0; i < n; i++) {
-        scanf("%d", &tab1[i]);  // read elements of tab1 (lecture des éléments de tab1)
+        scanf("%d", &tab1[i]);  // lecture des éléments de tab1
     }
 
-    int m;  // size of the second array (taille du deuxième tableau)
-    scanf("%d", &m); // read the size (lecture de la taille)
+    int m;  // taille du deuxième tableau
+    scanf("%d", &m);
 
-    int tab2[m];  // second array (deuxième tableau)
-    // FIX: Changed from scanf("%d", &tab1[i]) to scanf("%d", &tab2[i])
+    int tab2[m];  // deuxième tableau
     for (int i = 0; i < m; i++) {
-        scanf("%d", &tab2[i]);  // read elements of tab2 (lecture des éléments de tab2)
+        scanf("%d", &tab2[i]);  // lecture des éléments de tab2 (corrigé ici)
     }
 
-    // Display the intersection (Affichage de l'intersection)
     printf("Intersection :");
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < m; j++) {
             if (tab1[i] == tab2[j]) {
-                printf(" %d", tab1[i]);  // common element found (élément commun trouvé)
-                break;                   // we don't want to repeat this same element (on ne veut pas répéter ce même élément)
+                printf(" %d", tab1[i]);
+                break;
             }
         }
     }
-    printf("\n"); // new line at the end
+    printf("\n");
 
-    return 0; // tells the computer that everything went well
+    return 0;
 }
