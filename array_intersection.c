@@ -1,41 +1,39 @@
 #include <stdio.h>
 
-int main(void)
-{
-    int n, m;
-    int i, j, k;
-    int tab1[100], tab2[100];
+int deja_imprime(int imprimés[], int taille, int valeur) {
+    for (int i = 0; i < taille; i++) {
+        if (imprimés[i] == valeur)
+            return 1; // valeur déjà imprimée
+    }
+    return 0;
+}
 
-    // Lecture de la taille du premier tableau
+int main() {
+    int n;
     scanf("%d", &n);
-    for (i = 0; i < n; i++)
-        scanf("%d", &tab1[i]); // Lecture un à un
 
-    // Lecture de la taille du deuxième tableau
+    int tab1[n];
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &tab1[i]);
+    }
+
+    int m;
     scanf("%d", &m);
-    for (i = 0; i < m; i++)
-        scanf("%d", &tab2[i]); // Lecture un à un
 
-    // Affichage de l'intersection sans doublons
+    int tab2[m];
+    for (int i = 0; i < m; i++) {
+        scanf("%d", &tab2[i]);
+    }
+
+    int imprimés[n < m ? n : m]; // tableau pour stocker les éléments déjà affichés
+    int compteur = 0; // nombre d'éléments déjà imprimés
+
     printf("Intersection :");
-    for (i = 0; i < n; i++)
-    {
-        for (j = 0; j < m; j++)
-        {
-            if (tab1[i] == tab2[j])
-            {
-                // Vérifier si déjà affiché
-                int deja_affiche = 0;
-                for (k = 0; k < i; k++)
-                {
-                    if (tab1[k] == tab1[i])
-                    {
-                        deja_affiche = 1;
-                        break;
-                    }
-                }
-                if (!deja_affiche)
-                    printf(" %d", tab1[i]);
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            if (tab1[i] == tab2[j] && !deja_imprime(imprimés, compteur, tab1[i])) {
+                printf(" %d", tab1[i]);
+                imprimés[compteur++] = tab1[i]; // stocker l'élément imprimé
                 break;
             }
         }
