@@ -1,33 +1,42 @@
 #include <stdio.h>
 
+#define MAX 100
+
 int main() {
-    int n;  // taille du premier tableau
+    int n, m;
+    int tab1[MAX], tab2[MAX];
+
     scanf("%d", &n);
-
-    int a[n];  // premier tableau
     for (int i = 0; i < n; i++) {
-        scanf("%d", &a[i]);  // lecture des éléments de tab1
+        scanf("%d", &tab1[i]);
     }
 
-    int m;  // taille du deuxième tableau
     scanf("%d", &m);
-
-    int b[m];  // deuxième tableau
     for (int i = 0; i < m; i++) {
-        scanf("%d", &b[i]);  // lecture des éléments de tab2
+        scanf("%d", &tab2[i]);
     }
 
-    // Affichage de l'intersection
     printf("Intersection :");
     for (int i = 0; i < n; i++) {
+        // Vérifier si tab1[i] a déjà été affiché
+        int deja_affiche = 0;
+        for (int k = 0; k < i; k++) {
+            if (tab1[i] == tab1[k]) {
+                deja_affiche = 1;
+                break;
+            }
+        }
+        if (deja_affiche) continue;
+
+        // Vérifier si tab1[i] existe dans tab2
         for (int j = 0; j < m; j++) {
-            if (a[i] == b[j]) {
-                printf(" %d", a[i]);  // élément commun trouvé
-                break;                   // on ne veut pas répéter ce même élément
+            if (tab1[i] == tab2[j]) {
+                printf(" %d", tab1[i]);
+                break;
             }
         }
     }
-    printf("\n");
 
+    printf("\n");
     return 0;
 }
