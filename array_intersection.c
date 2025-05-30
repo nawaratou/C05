@@ -1,42 +1,34 @@
-#include <stdio.h>
-
-#define MAX 100
+#include <stdio.h> // This line helps us do things like show text on the screen and read numbers.
 
 int main() {
-    int n, m;
-    int tab1[MAX], tab2[MAX];
+    int n;  // size of the first array (taille du premier tableau)
+    scanf("%d", &n); // read the size (lecture de la taille)
 
-    scanf("%d", &n);
+    int tab1[n];  // first array (premier tableau)
     for (int i = 0; i < n; i++) {
-        scanf("%d", &tab1[i]);
+        scanf("%d", &tab1[i]);  // read elements of tab1 (lecture des éléments de tab1)
     }
 
-    scanf("%d", &m);
+    int m;  // size of the second array (taille du deuxième tableau)
+    scanf("%d", &m); // read the size (lecture de la taille)
+
+    int tab2[m];  // second array (deuxième tableau)
+    // FIX: Changed from scanf("%d", &tab1[i]) to scanf("%d", &tab2[i])
     for (int i = 0; i < m; i++) {
-        scanf("%d", &tab2[i]);
+        scanf("%d", &tab2[i]);  // read elements of tab2 (lecture des éléments de tab2)
     }
 
+    // Display the intersection (Affichage de l'intersection)
     printf("Intersection :");
     for (int i = 0; i < n; i++) {
-        // Vérifier si tab1[i] a déjà été affiché
-        int deja_affiche = 0;
-        for (int k = 0; k < i; k++) {
-            if (tab1[i] == tab1[k]) {
-                deja_affiche = 1;
-                break;
-            }
-        }
-        if (deja_affiche) continue;
-
-        // Vérifier si tab1[i] existe dans tab2
         for (int j = 0; j < m; j++) {
             if (tab1[i] == tab2[j]) {
-                printf(" %d", tab1[i]);
-                break;
+                printf(" %d", tab1[i]);  // common element found (élément commun trouvé)
+                break;                   // we don't want to repeat this same element (on ne veut pas répéter ce même élément)
             }
         }
     }
+    printf("\n"); // new line at the end
 
-    printf("\n");
-    return 0;
+    return 0; // tells the computer that everything went well
 }
